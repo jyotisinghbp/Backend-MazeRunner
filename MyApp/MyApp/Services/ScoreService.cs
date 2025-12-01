@@ -13,9 +13,17 @@ namespace MyApp.Services
             public void UpdateScore(int points)
             {
                 score += points;
-            }
-
-            public int GetScore() => score;
         }
-    
+
+        public int GetScore() => score;
+
+        public void ResetScore()
+        {
+            score = 0;
+        }
+        
+
+
+    }
+
 }

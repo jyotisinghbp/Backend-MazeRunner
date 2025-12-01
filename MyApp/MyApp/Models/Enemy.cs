@@ -10,18 +10,25 @@ namespace MyApp.Models
         public int X { get; set; }
         public int Y { get; set; }
 
-        public void MoveRandomly(char[,] maze)
+       
+        
+    public void MoveRandomly(char[,] maze, List<Coin> coins)
+    {
+        var directions = new List<(int dx, int dy)> { (-1,0), (1,0), (0,-1), (0,1) };
+        var rand = new Random();
+        foreach (var dir in directions.OrderBy(x => rand.Next()))
         {
-            // Simple random movement logic
-            Random rnd = new Random();
-            int direction = rnd.Next(4);
-            switch (direction)
+            int newX = X + dir.dx;
+            int newY = Y + dir.dy;
+            if (maze[newX, newY] != '#' && !coins.Any(c => c.X == newX && c.Y == newY && !c.Collected))
             {
-                case 0: if (maze[X - 1, Y] != '#') X--; break; // Up
-                case 1: if (maze[X + 1, Y] != '#') X++; break; // Down
-                case 2: if (maze[X, Y - 1] != '#') Y--; break; // Left
-                case 3: if (maze[X, Y + 1] != '#') Y++; break; // Right
+                X = newX;
+                Y = newY;
+                break;
             }
         }
+    }
+
+
     }
 }

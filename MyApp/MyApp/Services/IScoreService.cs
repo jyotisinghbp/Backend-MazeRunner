@@ -8,6 +8,7 @@ namespace MyApp.Services
     {
         void UpdateScore(int points);
         int GetScore();
+        void ResetScore(); 
     }
 
 
